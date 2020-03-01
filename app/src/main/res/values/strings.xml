@@ -5,6 +5,11 @@
   <string name="navigation_drawer_close">Close navigation drawer</string>
 
   <string name="action_sair">Sair</string>
-  <!-- TODO: Remove or change this placeholder text -->
   <string name="modelo_fragment">Fragmento Modelo</string>
+  <string name="fragment_bimestre_a">1º Bimestre</string>
+  <string name="fragment_bimestre_b">2º Bimestre</string>
+  <string name="fragment_bimestre_c">3º Bimestre</string>
+  <string name="fragment_bimestre_d">4º Bimestre</string>
+  <string name="fragment_resultado_fiinal">Resultado Final</string>
+
 </resources>

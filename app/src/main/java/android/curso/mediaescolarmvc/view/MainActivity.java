@@ -1,13 +1,16 @@
 package android.curso.mediaescolarmvc.view;
 
 import android.curso.mediaescolarmvc.R;
-import android.curso.mediaescolarmvc.fragments.ModeloFragment;
+import android.curso.mediaescolarmvc.fragments.BimestreAFragment;
+import android.curso.mediaescolarmvc.fragments.BimestreBFragment;
+import android.curso.mediaescolarmvc.fragments.BimestreCFragment;
+import android.curso.mediaescolarmvc.fragments.BimestreDFragment;
+import android.curso.mediaescolarmvc.fragments.ResultadoFinalFragment;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
-import android.view.View;
-import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -15,6 +18,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+
+import java.text.DecimalFormat;
 
 public class MainActivity extends AppCompatActivity
   implements NavigationView.OnNavigationItemSelectedListener {
@@ -50,7 +56,7 @@ public class MainActivity extends AppCompatActivity
     fragmentManager = getSupportFragmentManager();
 
     // 4# passo
-    fragmentManager.beginTransaction().replace(R.id.content_fragment, new ModeloFragment()).commit();
+    //fragmentManager.beginTransaction().replace(R.id.content_fragment, new ModeloFragment()).commit();
   }
 
   @Override
@@ -87,14 +93,35 @@ public class MainActivity extends AppCompatActivity
   public boolean onNavigationItemSelected(MenuItem item) {
     int id = item.getItemId();
 
-    if (id == R.id.nav_camera) {
+    if (id == R.id.nav_resultado_final) {
+      setTitle("Resultado Final");
+      fragmentManager.beginTransaction().replace(R.id.content_fragment, new ResultadoFinalFragment()).commit();
 
-    } else if (id == R.id.nav_gallery) {
+    } else if (id == R.id.nav_bimestre_a) {
+      setTitle("Notas do 1º Bimestre");
+      fragmentManager.beginTransaction().replace(R.id.content_fragment, new BimestreAFragment()).commit();
+
+    } else if (id == R.id.nav_bimestre_b) {
+      setTitle("Notas do 2º Bimestre");
+      fragmentManager.beginTransaction().replace(R.id.content_fragment, new BimestreBFragment()).commit();
+
+    } else if (id == R.id.nav_bimestre_c) {
+      setTitle("Notas do 3º Bimestre");
+      fragmentManager.beginTransaction().replace(R.id.content_fragment, new BimestreCFragment()).commit();
+
+    } else if (id == R.id.nav_bimestre_d) {
+      setTitle("Notas do 4º Bimestre");
+      fragmentManager.beginTransaction().replace(R.id.content_fragment, new BimestreDFragment()).commit();
 
     } else if (id == R.id.nav_share) {
     }
     DrawerLayout drawer = findViewById(R.id.drawer_layout);
     drawer.closeDrawer(GravityCompat.START);
     return true;
+  }
+
+  public static String formatarValorDecimal(Double valor) {
+    DecimalFormat df = new DecimalFormat("#,###,##0.00");
+    return df.format(valor);
   }
 }
