@@ -9,63 +9,71 @@ package android.curso.mediaescolarmvc.model;
 
 public class MediaEscolar {
 
-    private String materia;
-    private String bimestre;
-    private String situacao;
-    private double notaProva;
-    private double notaMateria;
-    private double mediaFinal;
+  private int id;
+  private String materia;
+  private String bimestre;
+  private String situacao;
+  private double notaProva;
+  private double notaMateria;
+  private double mediaFinal;
 
-    public MediaEscolar(){
+  public MediaEscolar() {
 
-    }
+  }
 
+  public int getId() {
+    return id;
+  }
 
-    public String getMateria() {
-        return materia;
-    }
+  public void setId(int id) {
+    this.id = id;
+  }
 
-    public void setMateria(String materia) {
-        this.materia = materia;
-    }
+  public String getMateria() {
+    return materia;
+  }
 
-    public String getBimestre() {
-        return bimestre;
-    }
+  public void setMateria(String materia) {
+    this.materia = materia;
+  }
 
-    public void setBimestre(String bimestre) {
-        this.bimestre = bimestre;
-    }
+  public String getBimestre() {
+    return bimestre;
+  }
 
-    public String getSituacao() {
-        return situacao;
-    }
+  public void setBimestre(String bimestre) {
+    this.bimestre = bimestre;
+  }
 
-    public void setSituacao(String situacao) {
-        this.situacao = situacao;
-    }
+  public String getSituacao() {
+    return situacao;
+  }
 
-    public double getNotaProva() {
-        return notaProva;
-    }
+  public void setSituacao(String situacao) {
+    this.situacao = situacao;
+  }
 
-    public void setNotaProva(double notaProva) {
-        this.notaProva = notaProva;
-    }
+  public double getNotaProva() {
+    return notaProva;
+  }
 
-    public double getNotaMateria() {
-        return notaMateria;
-    }
+  public void setNotaProva(double notaProva) {
+    this.notaProva = notaProva;
+  }
 
-    public void setNotaMateria(double notaMateria) {
-        this.notaMateria = notaMateria;
-    }
+  public double getNotaMateria() {
+    return notaMateria;
+  }
 
-    public double getMediaFinal() {
-        return mediaFinal;
-    }
+  public void setNotaMateria(double notaMateria) {
+    this.notaMateria = notaMateria;
+  }
 
-    public void setMediaFinal(double mediaFinal) {
-        this.mediaFinal = mediaFinal;
-    }
+  public double getMediaFinal() {
+    return mediaFinal;
+  }
+
+  public void setMediaFinal(double mediaFinal) {
+    this.mediaFinal = mediaFinal;
+  }
 }
