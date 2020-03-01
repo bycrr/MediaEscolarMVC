@@ -19,14 +19,12 @@ public class MediaEscolarController extends DataSource {
     super(context);
   }
 
-  // TODO: implementar calculo da média
-  public void calcularMedia() {
-
+  public double calcularMedia(MediaEscolar obj) {
+    return (obj.getNotaProva() + obj.getNotaTrabalho()) / 2;
   }
 
-  // TODO: implementar calculo do resultado final
-  public void resultadoFinal() {
-
+  public String resultadoFinal(double media) {
+    return media >= 7 ? "Aprovado" : "Reprovado";
   }
 
   public boolean incluir(MediaEscolar obj) {
@@ -36,7 +34,7 @@ public class MediaEscolarController extends DataSource {
     dados.put(MediaEscolarDataModel.getBimestre(), obj.getBimestre());
     dados.put(MediaEscolarDataModel.getSituacao(), obj.getSituacao());
     dados.put(MediaEscolarDataModel.getNotaProva(), obj.getNotaProva());
-    dados.put(MediaEscolarDataModel.getNotaMateria(), obj.getNotaMateria());
+    dados.put(MediaEscolarDataModel.getNotaMateria(), obj.getNotaTrabalho());
     dados.put(MediaEscolarDataModel.getMediaFinal(), obj.getMediaFinal());
     sucesso = insert(MediaEscolarDataModel.getTABELA(), dados);
     return sucesso;
@@ -56,7 +54,7 @@ public class MediaEscolarController extends DataSource {
     dados.put(MediaEscolarDataModel.getBimestre(), obj.getBimestre());
     dados.put(MediaEscolarDataModel.getSituacao(), obj.getSituacao());
     dados.put(MediaEscolarDataModel.getNotaProva(), obj.getNotaProva());
-    dados.put(MediaEscolarDataModel.getNotaMateria(), obj.getNotaMateria());
+    dados.put(MediaEscolarDataModel.getNotaMateria(), obj.getNotaTrabalho());
     dados.put(MediaEscolarDataModel.getMediaFinal(), obj.getMediaFinal());
     sucesso = update(MediaEscolarDataModel.getTABELA(), dados);
     return sucesso;

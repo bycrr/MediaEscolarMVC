@@ -2,6 +2,8 @@ package android.curso.mediaescolarmvc.fragments;
 
 import android.content.Context;
 import android.curso.mediaescolarmvc.R;
+import android.curso.mediaescolarmvc.controller.MediaEscolarController;
+import android.curso.mediaescolarmvc.model.MediaEscolar;
 import android.curso.mediaescolarmvc.view.MainActivity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -15,6 +17,8 @@ import android.widget.Toast;
 
 public class BimestreDFragment extends Fragment {
 
+  MediaEscolar mediaEscolar;
+  MediaEscolarController mediaEscolarController;
   View view;
   Button btnCalcular;
   EditText editMateria;
@@ -95,16 +99,34 @@ public class BimestreDFragment extends Fragment {
           }
           // Após Validação
           if (dadosValidados) {
-            media = (notaProva + notaTrabalho) / 2;
+            mediaEscolar = new MediaEscolar();
+            mediaEscolar.setMateria(editMateria.getText().toString());
+            mediaEscolar.setNotaProva(Double.parseDouble(editNotaProva.getText().toString()));
+            mediaEscolar.setNotaTrabalho(Double.parseDouble(editNotaTrabalho.getText().toString()));
+            mediaEscolar.setBimestre("4º Bimestre");
+            //media = (notaProva + notaTrabalho) / 2;
+            mediaEscolarController = new MediaEscolarController(context);
+            media = mediaEscolarController.calcularMedia(mediaEscolar);
+            mediaEscolar.setMediaFinal(media);
+            mediaEscolar.setSituacao(mediaEscolarController.resultadoFinal(media));
             txtResultado.setText(MainActivity.formatarValorDecimal(media));
 
-            if (media >= 7) txtSituacaoFinal.setText("Aprovado");
-            else txtSituacaoFinal.setText("Reprovado");
+            /*if (media >= 7) txtSituacaoFinal.setText("Aprovado");
+            else txtSituacaoFinal.setText("Reprovado");*/
+            txtSituacaoFinal.setText(mediaEscolar.getSituacao());
 
             editNotaProva.setText(MainActivity.formatarValorDecimal(notaProva));
             editNotaTrabalho.setText(MainActivity.formatarValorDecimal(notaTrabalho));
 
             //salvarSharedPreferences();
+            if (mediaEscolarController.incluir(mediaEscolar)) {
+              // obj salvo c/sucesso no DB
+              Toast.makeText(context, "Dados salvos com sucesso...", Toast.LENGTH_LONG).show();
+
+            } else {
+              // falha ao salvar o obj no DB
+              Toast.makeText(context, "Falha ao salvar os dados...", Toast.LENGTH_LONG).show();
+            }
           }
         } catch (Exception e) {
           Toast.makeText(context, "Informe as notas...", Toast.LENGTH_LONG).show();
