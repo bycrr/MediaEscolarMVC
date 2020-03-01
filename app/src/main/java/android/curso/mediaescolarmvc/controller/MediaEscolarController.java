@@ -6,6 +6,8 @@ import android.curso.mediaescolarmvc.datamodel.MediaEscolarDataModel;
 import android.curso.mediaescolarmvc.datasource.DataSource;
 import android.curso.mediaescolarmvc.model.MediaEscolar;
 
+import java.util.List;
+
 /**
  * Created by marcomaddo on 04/11/2017.
  */
@@ -58,5 +60,9 @@ public class MediaEscolarController extends DataSource {
     dados.put(MediaEscolarDataModel.getMediaFinal(), obj.getMediaFinal());
     sucesso = update(MediaEscolarDataModel.getTABELA(), dados);
     return sucesso;
+  }
+
+  public List<MediaEscolar> listar() {
+    return getAllMediaEscolar();
   }
 }
