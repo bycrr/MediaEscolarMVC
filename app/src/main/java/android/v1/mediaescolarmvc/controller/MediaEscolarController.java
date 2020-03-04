@@ -1,10 +1,10 @@
-package android.curso.mediaescolarmvc.controller;
+package android.v1.mediaescolarmvc.controller;
 
 import android.content.ContentValues;
 import android.content.Context;
-import android.curso.mediaescolarmvc.datamodel.MediaEscolarDataModel;
-import android.curso.mediaescolarmvc.datasource.DataSource;
-import android.curso.mediaescolarmvc.model.MediaEscolar;
+import android.v1.mediaescolarmvc.datamodel.MediaEscolarDataModel;
+import android.v1.mediaescolarmvc.datasource.DataSource;
+import android.v1.mediaescolarmvc.model.MediaEscolar;
 
 import java.util.List;
 

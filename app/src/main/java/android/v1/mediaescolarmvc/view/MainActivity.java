@@ -1,11 +1,11 @@
-package android.curso.mediaescolarmvc.view;
+package android.v1.mediaescolarmvc.view;
 
-import android.curso.mediaescolarmvc.R;
-import android.curso.mediaescolarmvc.fragments.BimestreAFragment;
-import android.curso.mediaescolarmvc.fragments.BimestreBFragment;
-import android.curso.mediaescolarmvc.fragments.BimestreCFragment;
-import android.curso.mediaescolarmvc.fragments.BimestreDFragment;
-import android.curso.mediaescolarmvc.fragments.ResultadoFinalFragment;
+import android.v1.mediaescolarmvc.R;
+import android.v1.mediaescolarmvc.fragments.BimestreAFragment;
+import android.v1.mediaescolarmvc.fragments.BimestreBFragment;
+import android.v1.mediaescolarmvc.fragments.BimestreCFragment;
+import android.v1.mediaescolarmvc.fragments.BimestreDFragment;
+import android.v1.mediaescolarmvc.fragments.ResultadoFinalFragment;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;

@@ -1,9 +1,9 @@
-package android.curso.mediaescolarmvc.datasource;
+package android.v1.mediaescolarmvc.datasource;
 
 import android.content.ContentValues;
 import android.content.Context;
-import android.curso.mediaescolarmvc.datamodel.MediaEscolarDataModel;
-import android.curso.mediaescolarmvc.model.MediaEscolar;
+import android.v1.mediaescolarmvc.datamodel.MediaEscolarDataModel;
+import android.v1.mediaescolarmvc.model.MediaEscolar;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;

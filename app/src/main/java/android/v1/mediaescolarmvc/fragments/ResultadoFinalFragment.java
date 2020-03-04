@@ -1,6 +1,6 @@
-package android.curso.mediaescolarmvc.fragments;
+package android.v1.mediaescolarmvc.fragments;
 
-import android.curso.mediaescolarmvc.R;
+import android.v1.mediaescolarmvc.R;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;

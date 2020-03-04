@@ -1,10 +1,10 @@
-package android.curso.mediaescolarmvc.fragments;
+package android.v1.mediaescolarmvc.fragments;
 
 import android.content.Context;
-import android.curso.mediaescolarmvc.R;
-import android.curso.mediaescolarmvc.controller.MediaEscolarController;
-import android.curso.mediaescolarmvc.model.MediaEscolar;
-import android.curso.mediaescolarmvc.view.MainActivity;
+import android.v1.mediaescolarmvc.R;
+import android.v1.mediaescolarmvc.controller.MediaEscolarController;
+import android.v1.mediaescolarmvc.model.MediaEscolar;
+import android.v1.mediaescolarmvc.view.MainActivity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -15,7 +15,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class BimestreCFragment extends Fragment {
+public class BimestreAFragment extends Fragment {
 
   MediaEscolar mediaEscolar;
   MediaEscolarController mediaEscolarController;
@@ -32,7 +32,7 @@ public class BimestreCFragment extends Fragment {
   double media;
   Context context;
 
-  public BimestreCFragment() {
+  public BimestreAFragment() {
 
   }
 
@@ -46,7 +46,7 @@ public class BimestreCFragment extends Fragment {
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
                            Bundle savedInstanceState) {
     // Inflate the layout for this fragment
-    view = inflater.inflate(R.layout.fragment_bimestre_c, container, false);
+    view = inflater.inflate(R.layout.fragment_bimestre_a, container, false);
     editMateria = view.findViewById(R.id.editMateria);
     editNotaProva = view.findViewById(R.id.editNotaProva);
     editNotaTrabalho = view.findViewById(R.id.editNotaTrabalho);
@@ -103,7 +103,7 @@ public class BimestreCFragment extends Fragment {
             mediaEscolar.setMateria(editMateria.getText().toString());
             mediaEscolar.setNotaProva(Double.parseDouble(editNotaProva.getText().toString()));
             mediaEscolar.setNotaTrabalho(Double.parseDouble(editNotaTrabalho.getText().toString()));
-            mediaEscolar.setBimestre("3º Bimestre");
+            mediaEscolar.setBimestre("1º Bimestre");
             //media = (notaProva + notaTrabalho) / 2;
             mediaEscolarController = new MediaEscolarController(context);
             media = mediaEscolarController.calcularMedia(mediaEscolar);
@@ -134,4 +134,5 @@ public class BimestreCFragment extends Fragment {
       }
     });
     return view;
-  }}
+  }
+}

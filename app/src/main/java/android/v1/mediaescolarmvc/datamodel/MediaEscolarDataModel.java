@@ -1,4 +1,4 @@
-package android.curso.mediaescolarmvc.datamodel;
+package android.v1.mediaescolarmvc.datamodel;
 
 public class MediaEscolarDataModel {
 

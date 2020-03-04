@@ -1,9 +1,9 @@
-package android.curso.mediaescolarmvc.view;
+package android.v1.mediaescolarmvc.view;
 
 import android.content.Intent;
-import android.curso.mediaescolarmvc.R;
-import android.curso.mediaescolarmvc.controller.MediaEscolarController;
-import android.curso.mediaescolarmvc.model.MediaEscolar;
+import android.v1.mediaescolarmvc.R;
+import android.v1.mediaescolarmvc.controller.MediaEscolarController;
+import android.v1.mediaescolarmvc.model.MediaEscolar;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;

@@ -1,4 +1,4 @@
-package android.curso.mediaescolarmvc.model;
+package android.v1.mediaescolarmvc.model;
 
 /**
  * Created by marcomaddo on 04/11/2017.
