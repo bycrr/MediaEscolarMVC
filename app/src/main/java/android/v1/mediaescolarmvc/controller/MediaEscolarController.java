@@ -6,6 +6,7 @@ import android.v1.mediaescolarmvc.datamodel.MediaEscolarDataModel;
 import android.v1.mediaescolarmvc.datasource.DataSource;
 import android.v1.mediaescolarmvc.model.MediaEscolar;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -62,5 +63,9 @@ public class MediaEscolarController extends DataSource {
 
   public List<MediaEscolar> listar() {
     return getAllMediaEscolar();
+  }
+
+  public ArrayList<MediaEscolar> getResultadoFinal() {
+    return getAllResultadoFinal();
   }
 }

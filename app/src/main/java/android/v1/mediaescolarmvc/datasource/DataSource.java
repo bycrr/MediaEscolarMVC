@@ -103,5 +103,30 @@ public class DataSource extends SQLiteOpenHelper {
     }
     return lista;
   }
+
+  public ArrayList<MediaEscolar> getAllResultadoFinal() {
+    MediaEscolar obj;
+    ArrayList<MediaEscolar> lista = new ArrayList<>();
+    String sql = "SELECT * FROM " + MediaEscolarDataModel.getTABELA() + " ORDER BY materia";
+    cursor = db.rawQuery(sql, null);
+
+    /*if (cursor.moveToFirst()) {
+      do {
+        obj = new MediaEscolar();
+        obj.setId(cursor.getInt(cursor.getColumnIndex(MediaEscolarDataModel.getId())));
+        obj.setMateria(cursor.getString(cursor.getColumnIndex(MediaEscolarDataModel.getMateria())));
+        lista.add(obj);
+      } while (cursor.moveToNext());
+    }*/
+    while (cursor.moveToNext()) {
+      obj = new MediaEscolar();
+      obj.setId(cursor.getInt(cursor.getColumnIndex(MediaEscolarDataModel.getId())));
+      obj.setMateria(cursor.getString(cursor.getColumnIndex(MediaEscolarDataModel.getMateria())));
+      obj.setSituacao(cursor.getString(cursor.getColumnIndex(MediaEscolarDataModel.getSituacao())));
+      obj.setBimestre(cursor.getString(cursor.getColumnIndex(MediaEscolarDataModel.getBimestre())));
+      lista.add(obj);
+    }
+    return lista;
+  }
 }
 
