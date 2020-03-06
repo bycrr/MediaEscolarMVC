@@ -33,7 +33,6 @@ public class ResultadoFinalListAdapter extends ArrayAdapter<MediaEscolar> implem
     TextView txtSituacao;
     TextView txtMateria;
     ImageView imgLogo;
-
   }
 
   public ResultadoFinalListAdapter(ArrayList<MediaEscolar> datasetMediaEscolar, Context context) {
@@ -61,9 +60,9 @@ public class ResultadoFinalListAdapter extends ArrayAdapter<MediaEscolar> implem
   public View getView(int position, View linhaDataSet, @NonNull ViewGroup parent) {
     MediaEscolar mediaEscolar = getItem(position);
     ViewHolder linha;
+    linha = new ViewHolder();
 
     if (linhaDataSet == null) {
-      linha = new ViewHolder();
       LayoutInflater layoutResultadoFinalList = LayoutInflater.from(getContext());
       linhaDataSet = layoutResultadoFinalList.inflate(R.layout.lisview_resultado_final, parent, false);
       linha.txtMateria = linhaDataSet.findViewById(R.id.txtMateria);
@@ -75,9 +74,9 @@ public class ResultadoFinalListAdapter extends ArrayAdapter<MediaEscolar> implem
     } else {
       linha = (ViewHolder) linhaDataSet.getTag();
     }
-    linha.txtMateria.setText(mediaEscolar.getMateria());
-    linha.txtBimestre.setText(mediaEscolar.getBimestre());
-    linha.txtSituacao.setText(mediaEscolar.getSituacao());
+    linha.txtMateria.setText(mediaEscolar.getMateria().toString());
+    linha.txtBimestre.setText(mediaEscolar.getBimestre().toString());
+    linha.txtSituacao.setText(mediaEscolar.getSituacao().toString());
     linha.imgLogo.setOnClickListener(this);
     linha.imgLogo.setTag(position);
 
