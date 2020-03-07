@@ -1,13 +1,15 @@
 package android.v1.mediaescolarmvc.view;
 
 import android.content.Intent;
-import android.v1.mediaescolarmvc.R;
-import android.v1.mediaescolarmvc.controller.MediaEscolarController;
-import android.v1.mediaescolarmvc.model.MediaEscolar;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.v1.mediaescolarmvc.R;
+import android.v1.mediaescolarmvc.controller.AplicativoController;
+import android.v1.mediaescolarmvc.controller.MediaEscolarController;
+import android.v1.mediaescolarmvc.model.MediaEscolar;
+import android.v1.mediaescolarmvc.util.UtilMediaEscolar;
 
 import java.util.List;
 
@@ -23,7 +25,16 @@ public class SplashActivity extends AppCompatActivity {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_splash);
-    apresentarTelaSplash();
+
+    // verificar se Google Play Service Client está instalado
+
+    if (AplicativoController.verificarGooglePlayServices(SplashActivity.this)) {
+      apresentarTelaSplash();
+
+    } else {
+      //Toast.makeText(getApplicationContext(), "Google Play Services não configurado!", Toast.LENGTH_LONG).show();
+      UtilMediaEscolar.showMessage(getApplicationContext(), "Google Play Services não configurado!");
+    }
   }
 
   private void apresentarTelaSplash() {

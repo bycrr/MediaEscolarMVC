@@ -1,11 +1,5 @@
 package android.v1.mediaescolarmvc.view;
 
-import android.v1.mediaescolarmvc.R;
-import android.v1.mediaescolarmvc.fragments.BimestreAFragment;
-import android.v1.mediaescolarmvc.fragments.BimestreBFragment;
-import android.v1.mediaescolarmvc.fragments.BimestreCFragment;
-import android.v1.mediaescolarmvc.fragments.BimestreDFragment;
-import android.v1.mediaescolarmvc.fragments.ResultadoFinalFragment;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -16,11 +10,15 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.v1.mediaescolarmvc.R;
+import android.v1.mediaescolarmvc.fragments.BimestreAFragment;
+import android.v1.mediaescolarmvc.fragments.BimestreBFragment;
+import android.v1.mediaescolarmvc.fragments.BimestreCFragment;
+import android.v1.mediaescolarmvc.fragments.BimestreDFragment;
+import android.v1.mediaescolarmvc.fragments.ResultadoFinalFragment;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-
-import java.text.DecimalFormat;
 
 public class MainActivity extends AppCompatActivity
   implements NavigationView.OnNavigationItemSelectedListener {
@@ -118,10 +116,5 @@ public class MainActivity extends AppCompatActivity
     DrawerLayout drawer = findViewById(R.id.drawer_layout);
     drawer.closeDrawer(GravityCompat.START);
     return true;
-  }
-
-  public static String formatarValorDecimal(Double valor) {
-    DecimalFormat df = new DecimalFormat("#,###,##0.00");
-    return df.format(valor);
   }
 }

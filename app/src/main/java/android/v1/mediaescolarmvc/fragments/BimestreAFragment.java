@@ -1,19 +1,18 @@
 package android.v1.mediaescolarmvc.fragments;
 
 import android.content.Context;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.v1.mediaescolarmvc.R;
 import android.v1.mediaescolarmvc.controller.MediaEscolarController;
 import android.v1.mediaescolarmvc.model.MediaEscolar;
-import android.v1.mediaescolarmvc.view.MainActivity;
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import android.v1.mediaescolarmvc.util.UtilMediaEscolar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class BimestreAFragment extends Fragment {
 
@@ -70,7 +69,8 @@ public class BimestreAFragment extends Fragment {
 
             if (notaProva > 10) {
               dadosValidados = false;
-              Toast.makeText(context, "Nota inválida!", Toast.LENGTH_SHORT).show();
+              //Toast.makeText(context, "Nota inválida!", Toast.LENGTH_SHORT).show();
+              UtilMediaEscolar.showMessage(context, "Nota inválida!");
               editNotaProva.requestFocus();
 
             } else {
@@ -86,7 +86,8 @@ public class BimestreAFragment extends Fragment {
 
             if (notaTrabalho > 10) {
               dadosValidados = false;
-              Toast.makeText(context, "Nota inválida!", Toast.LENGTH_SHORT).show();
+              //Toast.makeText(context, "Nota inválida!", Toast.LENGTH_SHORT).show();
+              UtilMediaEscolar.showMessage(context, "Nota inválida!");
               editNotaTrabalho.requestFocus();
 
             } else {
@@ -109,27 +110,30 @@ public class BimestreAFragment extends Fragment {
             media = mediaEscolarController.calcularMedia(mediaEscolar);
             mediaEscolar.setMediaFinal(media);
             mediaEscolar.setSituacao(mediaEscolarController.resultadoFinal(media));
-            txtResultado.setText(MainActivity.formatarValorDecimal(media));
+            txtResultado.setText(UtilMediaEscolar.formatarValorDecimal(media));
 
             /*if (media >= 7) txtSituacaoFinal.setText("Aprovado");
             else txtSituacaoFinal.setText("Reprovado");*/
             txtSituacaoFinal.setText(mediaEscolar.getSituacao());
 
-            editNotaProva.setText(MainActivity.formatarValorDecimal(notaProva));
-            editNotaTrabalho.setText(MainActivity.formatarValorDecimal(notaTrabalho));
+            editNotaProva.setText(UtilMediaEscolar.formatarValorDecimal(notaProva));
+            editNotaTrabalho.setText(UtilMediaEscolar.formatarValorDecimal(notaTrabalho));
 
             //salvarSharedPreferences();
             if (mediaEscolarController.incluir(mediaEscolar)) {
               // obj salvo c/sucesso no DB
-              Toast.makeText(context, "Dados salvos com sucesso...", Toast.LENGTH_LONG).show();
+              //Toast.makeText(context, "Dados salvos com sucesso...", Toast.LENGTH_LONG).show();
+              UtilMediaEscolar.showMessage(context, "Dados salvos com sucesso...");
 
             } else {
               // falha ao salvar o obj no DB
-              Toast.makeText(context, "Falha ao salvar os dados...", Toast.LENGTH_LONG).show();
+              //Toast.makeText(context, "Falha ao salvar os dados...", Toast.LENGTH_LONG).show();
+              UtilMediaEscolar.showMessage(context, "Falha ao salvar os dados...");
             }
           }
         } catch (Exception e) {
-          Toast.makeText(context, "Informe as notas...", Toast.LENGTH_LONG).show();
+          //Toast.makeText(context, "Informe as notas...", Toast.LENGTH_LONG).show();
+          UtilMediaEscolar.showMessage(context, "Informe as notas...");
         }
       }
     });
