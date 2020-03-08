@@ -2,6 +2,7 @@ package android.v1.mediaescolarmvc.datasource;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.sqlite.SQLiteCantOpenDatabaseException;
 import android.v1.mediaescolarmvc.datamodel.MediaEscolarDataModel;
 import android.v1.mediaescolarmvc.model.MediaEscolar;
 import android.database.Cursor;
@@ -128,6 +129,23 @@ public class DataSource extends SQLiteOpenHelper {
       lista.add(obj);
     }
     return lista;
+  }
+
+  public void deletarTabela(String tabela) {
+    try {
+      db.execSQL("DROP TABLE IF EXISTS " + tabela);
+
+    } catch (Exception e) {
+
+    }
+  }
+
+  public void criarTabela(String queryCriarTabela) {
+    try {
+      db.execSQL(queryCriarTabela);
+
+    } catch (SQLiteCantOpenDatabaseException e) {
+    }
   }
 }
 

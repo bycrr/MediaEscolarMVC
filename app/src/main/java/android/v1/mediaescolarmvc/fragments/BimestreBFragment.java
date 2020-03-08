@@ -39,6 +39,7 @@ public class BimestreBFragment extends Fragment {
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     context = getContext();
+    mediaEscolarController = new MediaEscolarController(context);
   }
 
   @Override
@@ -67,7 +68,7 @@ public class BimestreBFragment extends Fragment {
           if (editNotaProva.getText().toString().length() > 0) {
             notaProva = Double.parseDouble(editNotaProva.getText().toString());
 
-            if (notaProva > 10) {
+            if (mediaEscolarController.isNotaInformadaValida(notaProva)) {
               dadosValidados = false;
               //Toast.makeText(context, "Nota inválida!", Toast.LENGTH_SHORT).show();
               UtilMediaEscolar.showMessage(context, "Nota inválida!");
@@ -84,7 +85,7 @@ public class BimestreBFragment extends Fragment {
           if (editNotaTrabalho.getText().toString().length() > 0) {
             notaTrabalho = Double.parseDouble(editNotaTrabalho.getText().toString());
 
-            if (notaTrabalho > 10) {
+            if (mediaEscolarController.isNotaInformadaValida(notaTrabalho)) {
               dadosValidados = false;
               //Toast.makeText(context, "Nota inválida!", Toast.LENGTH_SHORT).show();
               UtilMediaEscolar.showMessage(context, "Nota inválida!");
@@ -106,7 +107,6 @@ public class BimestreBFragment extends Fragment {
             mediaEscolar.setNotaTrabalho(Double.parseDouble(editNotaTrabalho.getText().toString()));
             mediaEscolar.setBimestre("2º Bimestre");
             //media = (notaProva + notaTrabalho) / 2;
-            mediaEscolarController = new MediaEscolarController(context);
             media = mediaEscolarController.calcularMedia(mediaEscolar);
             mediaEscolar.setMediaFinal(media);
             mediaEscolar.setSituacao(mediaEscolarController.resultadoFinal(media));

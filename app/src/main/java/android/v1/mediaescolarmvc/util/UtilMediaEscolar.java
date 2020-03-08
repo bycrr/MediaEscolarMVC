@@ -10,7 +10,7 @@ public class UtilMediaEscolar {
   // URL do servidor apache
   // informe o enderço IP se estiver rodando em seu computador
   // informe a URL se estiver rodando em uma hospedagem
-  public static final String URL_WEB_SERVICE = "localhost/mediaescolar";
+  public static final String URL_WEB_SERVICE = "http://192.168.1.141/mediaescolar/";
 
   // tempo máximo p/considerar um TIMEOUT p/conectar ao apache (conectando)
   public static final int CONNECTION_TIMEOUT = 10000; // 10 segundos

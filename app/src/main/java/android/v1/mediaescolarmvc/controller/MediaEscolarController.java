@@ -68,4 +68,8 @@ public class MediaEscolarController extends DataSource {
   public ArrayList<MediaEscolar> getResultadoFinal() {
     return getAllResultadoFinal();
   }
+
+  public boolean isNotaInformadaValida(Double nota) {
+    return nota > 10;
+  }
 }

@@ -3,6 +3,7 @@ package android.v1.mediaescolarmvc.view;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.speech.tts.TextToSpeech;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.v1.mediaescolarmvc.R;
@@ -18,8 +19,10 @@ import java.util.List;
  * aplicativo, pode ser utilizada para executar atualizações
  * enquanto carrega o app
  */
-public class SplashActivity extends AppCompatActivity {
+public class SplashActivity extends AppCompatActivity implements TextToSpeech.OnInitListener {
+
   private static final int SPLASH_TIME_OUT = 5000;
+  private TextToSpeech textToSpeech;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -81,5 +84,10 @@ public class SplashActivity extends AppCompatActivity {
         finish();
       }
     }, SPLASH_TIME_OUT);
+  }
+
+  @Override
+  public void onInit(int i) {
+
   }
 }
