@@ -49,7 +49,7 @@ public class ResultadoFinalFragment extends Fragment {
     mediaEscolarController = new MediaEscolarController(getContext());
     listView = view.findViewById(R.id.listview);
     datasetMediaEscolar = mediaEscolarController.getAllResultadoFinal();
-    ResultadoFinalListAdapter adapter = new ResultadoFinalListAdapter(datasetMediaEscolar, getContext());
+    final ResultadoFinalListAdapter adapter = new ResultadoFinalListAdapter(datasetMediaEscolar, getContext());
     listView.setAdapter(adapter);
 
     listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -57,6 +57,8 @@ public class ResultadoFinalFragment extends Fragment {
       public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
         MediaEscolar mediaEscolar = datasetMediaEscolar.get(position);
         Snackbar.make(view, mediaEscolar.getMateria() + "\n Média Final: " + mediaEscolar.getMediaFinal(), Snackbar.LENGTH_LONG).setAction("No action", null).show();
+        //datasetMediaEscolar = mediaEscolarController.getAllResultadoFinal();
+        //adapter.atualizarLista(datasetMediaEscolar);
       }
     });
 

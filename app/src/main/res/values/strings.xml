@@ -11,8 +11,9 @@
   <string name="fragment_bimestre_c">3º Bimestre</string>
   <string name="fragment_bimestre_d">4º Bimestre</string>
   <string name="fragment_resultado_fiinal">Resultado Final</string>
-    <string name="txtLogo">Logo Média Escolar</string>
+  <string name="txtLogo">Logo Média Escolar</string>
   <string name="txtResultado">1º Bim. - Matemática - Aprovado</string>
-    <string name="bimestre">Bimestre</string>
-
+  <string name="bimestre">Bimestre</string>
+  <string name="txtEditar">Editar</string>
+  <string name="txtDeletar">Deletar</string>
 </resources>
