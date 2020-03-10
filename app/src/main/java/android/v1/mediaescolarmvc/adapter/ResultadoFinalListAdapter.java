@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -37,11 +38,13 @@ public class ResultadoFinalListAdapter extends ArrayAdapter<MediaEscolar> implem
   ArrayList<MediaEscolar> dados;
   MediaEscolar mediaEscolar;
   MediaEscolarController mediaEscolarController;
+  ViewHolder linha;
 
   private static class ViewHolder {
     TextView txtBimestre;
     TextView txtSituacao;
     TextView txtMateria;
+    TextView txtMedia;
     ImageView imgLogo;
     ImageView imgConsultar;
     ImageView imgEditar;
@@ -81,24 +84,18 @@ public class ResultadoFinalListAdapter extends ArrayAdapter<MediaEscolar> implem
 
       case R.id.imgConsultar:
         builder = new AlertDialog.Builder(getContext());
-        builder.setTitle("ALERTA");
-        builder.setMessage("Deseja consultar este registro?");
+        builder.setTitle("CONSULTA");
+        builder.setMessage("Bimestre: " + mediaEscolar.getBimestre() + "\nMatéria: " + mediaEscolar.getMateria() + "\nSituação: " + mediaEscolar.getSituacao() + "\n\nMédia Final: " + mediaEscolar.getMediaFinal());
         builder.setCancelable(true);
         builder.setIcon(R.mipmap.ic_launcher);
 
-        builder.setPositiveButton("SIM", new Dialog.OnClickListener(){
-          @Override
-          public void onClick(DialogInterface dialog, int which) {
-            // consultar o registro
-          }
-        });
-
-        builder.setNegativeButton("CANCELAR", new Dialog.OnClickListener(){
+        builder.setPositiveButton("VOLTAR", new Dialog.OnClickListener(){
           @Override
           public void onClick(DialogInterface dialog, int which) {
             dialog.cancel();
           }
         });
+
         alertDialog = builder.create();
         alertDialog.show();
         break;
@@ -115,8 +112,102 @@ public class ResultadoFinalListAdapter extends ArrayAdapter<MediaEscolar> implem
           public void onClick(DialogInterface dialog, int which) {
             // deletar o registro
             mediaEscolarController.apagar(mediaEscolar);
-            ArrayList<MediaEscolar> datasetMediaEscolar = mediaEscolarController.getAllResultadoFinal();
-            atualizarLista(datasetMediaEscolar);
+            // caso for preciso desabilitar algum dos botõeszinhos =>
+            // linha.imgDeletar.setEnabled(false);
+            atualizarLista(mediaEscolarController.getAllResultadoFinal());
+            notifyDataSetChanged();
+          }
+        });
+        builder.setNegativeButton("CANCELAR", new Dialog.OnClickListener(){
+          @Override
+          public void onClick(DialogInterface dialog, int which) {
+            dialog.cancel();
+          }
+        });
+        alertDialog = builder.create();
+        alertDialog.show();
+        break;
+
+      case R.id.imgEditar:
+        // TODO: layout
+        // TODO: criar alertDialog p/editar os dados
+        // TODO: consumir MVC
+        // TODO: atualizar dataset/listview
+        View alertView = view.inflate(getContext(), R.layout.alert_dialog_editar_listview, null);
+        final EditText editMateria = alertView.findViewById(R.id.editMateria);
+        final EditText editNotaTrabalho = alertView.findViewById(R.id.editNotaTrabalho);
+        final EditText editNotaProva = alertView.findViewById(R.id.editNotaProva);
+        editMateria.setText(mediaEscolar.getMateria());
+        editNotaTrabalho.setText(String.valueOf(mediaEscolar.getNotaTrabalho()));
+        editNotaProva.setText(String.valueOf(mediaEscolar.getNotaProva()));
+        AlertDialog.Builder alertbox = new AlertDialog.Builder(alertView.getRootView().getContext());
+        alertbox.setMessage(mediaEscolar.getBimestre());
+        alertbox.setTitle("Editando");
+        alertbox.setView(alertView);
+
+        alertbox.setNeutralButton("Salvar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+              // TODO: implementar validação
+              mediaEscolar.setMateria(editMateria.getText().toString());
+              mediaEscolar.setNotaProva(Double.parseDouble(editNotaProva.getText().toString()));
+              mediaEscolar.setNotaTrabalho(Double.parseDouble(editNotaTrabalho.getText().toString()));
+              Double mediaFinal = mediaEscolarController.calcularMedia(mediaEscolar);
+              mediaEscolar.setMediaFinal(mediaFinal);
+              mediaEscolar.setSituacao(mediaEscolarController.resultadoFinal(mediaFinal));
+              mediaEscolarController.alterar(mediaEscolar);
+              atualizarLista(mediaEscolarController.getAllResultadoFinal());
+            }
+          });
+        alertbox.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+          @Override
+          public void onClick(DialogInterface dialogInterface, int i) {
+
+          }
+        });
+        alertbox.show();
+
+        /*builder = new AlertDialog.Builder(getContext());
+        builder.setTitle("ALERTA");
+        builder.setMessage("Deseja editar este registro?");
+        builder.setCancelable(true);
+        builder.setIcon(R.mipmap.ic_launcher);
+
+        builder.setPositiveButton("SIM", new Dialog.OnClickListener(){
+          @Override
+          public void onClick(DialogInterface dialog, int which) {
+            // editar o registro
+            mediaEscolar.setMediaFinal(5);
+            mediaEscolar.setSituacao("Reprovado");
+            mediaEscolarController.alterar(mediaEscolar);
+            atualizarLista(mediaEscolarController.getAllResultadoFinal());
+            notifyDataSetChanged();
+          }
+        });
+
+        builder.setNegativeButton("CANCELAR", new Dialog.OnClickListener(){
+          @Override
+          public void onClick(DialogInterface dialog, int which) {
+            dialog.cancel();
+          }
+        });
+        alertDialog = builder.create();
+        alertDialog.show();*/
+        break;
+
+      /*case R.id.imgSalvar:
+        builder = new AlertDialog.Builder(getContext());
+        builder.setTitle("ALERTA");
+        builder.setMessage("Deseja salvar este registro?");
+        builder.setCancelable(true);
+        builder.setIcon(R.mipmap.ic_launcher);
+
+        builder.setPositiveButton("SIM", new Dialog.OnClickListener(){
+          @Override
+          public void onClick(DialogInterface dialog, int which) {
+            // salvar o registro
+            mediaEscolarController.alterar(mediaEscolar);
+            atualizarLista(mediaEscolarController.getAllResultadoFinal());
             notifyDataSetChanged();
           }
         });
@@ -129,55 +220,7 @@ public class ResultadoFinalListAdapter extends ArrayAdapter<MediaEscolar> implem
         });
         alertDialog = builder.create();
         alertDialog.show();
-        break;
-
-      case R.id.imgEditar:
-        builder = new AlertDialog.Builder(getContext());
-        builder.setTitle("ALERTA");
-        builder.setMessage("Deseja editar este registro?");
-        builder.setCancelable(true);
-        builder.setIcon(R.mipmap.ic_launcher);
-
-        builder.setPositiveButton("SIM", new Dialog.OnClickListener(){
-          @Override
-          public void onClick(DialogInterface dialog, int which) {
-            // editar o registro
-          }
-        });
-
-        builder.setNegativeButton("CANCELAR", new Dialog.OnClickListener(){
-          @Override
-          public void onClick(DialogInterface dialog, int which) {
-            dialog.cancel();
-          }
-        });
-        alertDialog = builder.create();
-        alertDialog.show();
-        break;
-
-      case R.id.imgSalvar:
-        builder = new AlertDialog.Builder(getContext());
-        builder.setTitle("ALERTA");
-        builder.setMessage("Deseja salvar este registro?");
-        builder.setCancelable(true);
-        builder.setIcon(R.mipmap.ic_launcher);
-
-        builder.setPositiveButton("SIM", new Dialog.OnClickListener(){
-          @Override
-          public void onClick(DialogInterface dialog, int which) {
-            // salvar o registro
-          }
-        });
-
-        builder.setNegativeButton("CANCELAR", new Dialog.OnClickListener(){
-          @Override
-          public void onClick(DialogInterface dialog, int which) {
-            dialog.cancel();
-          }
-        });
-        alertDialog = builder.create();
-        alertDialog.show();
-        break;
+        break;*/
     }
   }
 
@@ -185,7 +228,7 @@ public class ResultadoFinalListAdapter extends ArrayAdapter<MediaEscolar> implem
   @Override
   public View getView(int position, View linhaDataSet, @NonNull ViewGroup parent) {
     mediaEscolar = getItem(position);
-    ViewHolder linha;
+    //ViewHolder linha;
     linha = new ViewHolder();
 
     if (linhaDataSet == null) {
@@ -194,29 +237,31 @@ public class ResultadoFinalListAdapter extends ArrayAdapter<MediaEscolar> implem
       linha.txtMateria = linhaDataSet.findViewById(R.id.txtMateria);
       linha.txtBimestre = linhaDataSet.findViewById(R.id.txtBimestre);
       linha.txtSituacao = linhaDataSet.findViewById(R.id.txtSituacao);
+      linha.txtMedia = linhaDataSet.findViewById(R.id.txtMedia);
       linha.imgLogo = linhaDataSet.findViewById(R.id.imgLogo);
       linha.imgConsultar = linhaDataSet.findViewById(R.id.imgConsultar);
       linha.imgDeletar = linhaDataSet.findViewById(R.id.imgDeletar);
       linha.imgEditar = linhaDataSet.findViewById(R.id.imgEditar);
-      linha.imgSalvar = linhaDataSet.findViewById(R.id.imgSalvar);
+      //linha.imgSalvar = linhaDataSet.findViewById(R.id.imgSalvar);
       linhaDataSet.setTag(linha);
 
     } else {
       linha = (ViewHolder) linhaDataSet.getTag();
     }
-    linha.txtMateria.setText(mediaEscolar.getMateria().toString());
-    linha.txtBimestre.setText(mediaEscolar.getBimestre().toString());
-    linha.txtSituacao.setText(mediaEscolar.getSituacao().toString());
+    linha.txtMateria.setText(mediaEscolar.getMateria());
+    linha.txtBimestre.setText(mediaEscolar.getBimestre());
+    linha.txtSituacao.setText(mediaEscolar.getSituacao());
+    linha.txtMedia.setText(String.valueOf(mediaEscolar.getMediaFinal()));
     linha.imgLogo.setOnClickListener(this);
     linha.imgConsultar.setOnClickListener(this);
     linha.imgDeletar.setOnClickListener(this);
     linha.imgEditar.setOnClickListener(this);
-    linha.imgSalvar.setOnClickListener(this);
+    //linha.imgSalvar.setOnClickListener(this);
     linha.imgLogo.setTag(position);
     linha.imgConsultar.setTag(position);
     linha.imgDeletar.setTag(position);
     linha.imgEditar.setTag(position);
-    linha.imgSalvar.setTag(position);
+    //linha.imgSalvar.setTag(position);
 
     //return super.getView(position, convertView, parent);
     return linhaDataSet;

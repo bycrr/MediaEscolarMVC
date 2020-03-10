@@ -32,7 +32,7 @@ public class DataSource extends SQLiteOpenHelper {
       db.execSQL(MediaEscolarDataModel.criarTabela());
 
     } catch (Exception e) {
-      Log.e( "Media", "DB - erro: " + e.getMessage());
+      Log.e("Media", "DB - erro: " + e.getMessage());
     }
   }
 
@@ -80,6 +80,13 @@ public class DataSource extends SQLiteOpenHelper {
     return sucesso;
   }
 
+  /*public MediaEscolar buscarObjPeloID(String tabela, MediaEscolar obj) {
+    // select * from componente where numeroOS = 20
+    MediaEscolar mediaEscolar = new MediaEscolar();
+    String consultaSQL = "SELECT * FROM " + tabela + " WHERE id = '" + obj.getId() + "'";
+
+  }*/
+
   public List<MediaEscolar> getAllMediaEscolar() {
     MediaEscolar obj;
     List<MediaEscolar> lista = new ArrayList<>();
@@ -95,12 +102,15 @@ public class DataSource extends SQLiteOpenHelper {
       } while (cursor.moveToNext());
     }*/
     while (cursor.moveToNext()) {
-        obj = new MediaEscolar();
-        obj.setId(cursor.getInt(cursor.getColumnIndex(MediaEscolarDataModel.getId())));
-        obj.setMateria(cursor.getString(cursor.getColumnIndex(MediaEscolarDataModel.getMateria())));
-        obj.setSituacao(cursor.getString(cursor.getColumnIndex(MediaEscolarDataModel.getSituacao())));
-        obj.setBimestre(cursor.getString(cursor.getColumnIndex(MediaEscolarDataModel.getBimestre())));
-        lista.add(obj);
+      obj = new MediaEscolar();
+      obj.setId(cursor.getInt(cursor.getColumnIndex(MediaEscolarDataModel.getId())));
+      obj.setBimestre(cursor.getString(cursor.getColumnIndex(MediaEscolarDataModel.getBimestre())));
+      obj.setMateria(cursor.getString(cursor.getColumnIndex(MediaEscolarDataModel.getMateria())));
+      obj.setMediaFinal(cursor.getDouble(cursor.getColumnIndex(MediaEscolarDataModel.getMediaFinal())));
+      obj.setNotaProva(cursor.getDouble(cursor.getColumnIndex(MediaEscolarDataModel.getNotaProva())));
+      obj.setNotaTrabalho(cursor.getDouble(cursor.getColumnIndex(MediaEscolarDataModel.getNotaMateria())));
+      obj.setSituacao(cursor.getString(cursor.getColumnIndex(MediaEscolarDataModel.getSituacao())));
+      lista.add(obj);
     }
     return lista;
   }
@@ -122,10 +132,12 @@ public class DataSource extends SQLiteOpenHelper {
     while (cursor.moveToNext()) {
       obj = new MediaEscolar();
       obj.setId(cursor.getInt(cursor.getColumnIndex(MediaEscolarDataModel.getId())));
-      obj.setMateria(cursor.getString(cursor.getColumnIndex(MediaEscolarDataModel.getMateria())));
-      obj.setSituacao(cursor.getString(cursor.getColumnIndex(MediaEscolarDataModel.getSituacao())));
       obj.setBimestre(cursor.getString(cursor.getColumnIndex(MediaEscolarDataModel.getBimestre())));
+      obj.setMateria(cursor.getString(cursor.getColumnIndex(MediaEscolarDataModel.getMateria())));
       obj.setMediaFinal(cursor.getDouble(cursor.getColumnIndex(MediaEscolarDataModel.getMediaFinal())));
+      obj.setNotaProva(cursor.getDouble(cursor.getColumnIndex(MediaEscolarDataModel.getNotaProva())));
+      obj.setNotaTrabalho(cursor.getDouble(cursor.getColumnIndex(MediaEscolarDataModel.getNotaMateria())));
+      obj.setSituacao(cursor.getString(cursor.getColumnIndex(MediaEscolarDataModel.getSituacao())));
       lista.add(obj);
     }
     return lista;
