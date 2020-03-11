@@ -26,7 +26,6 @@ public class IncluirAsyncTask extends AsyncTask<String, String, String> {
   HttpURLConnection connection;
   URL url = null;
   Uri.Builder builder;
-
   private MediaEscolarController mediaEscolarController;
   Context context;
 
@@ -34,10 +33,10 @@ public class IncluirAsyncTask extends AsyncTask<String, String, String> {
     this.builder = new Uri.Builder();
     this.context = context;
 
-    // TODO: passagem de parâmetros p/o WS
+    // passagem de parâmetros p/o WS
     builder.appendQueryParameter("app", "MediaEscolar");
 
-    // TODO: usar data model
+    // usar data model
     builder.appendQueryParameter(MediaEscolarDataModel.getBimestre(), obj.getBimestre());
     builder.appendQueryParameter(MediaEscolarDataModel.getSituacao(), obj.getSituacao());
     builder.appendQueryParameter(MediaEscolarDataModel.getMediaFinal(), String.valueOf(obj.getMediaFinal()));
@@ -91,7 +90,7 @@ public class IncluirAsyncTask extends AsyncTask<String, String, String> {
       Log.e("WebService", "IOException - " + e.getMessage());
     }
 
-    // TODO: recebe JSON a resposta do servidor
+    // recebe JSON a resposta do servidor
     try {
       int response_code = connection.getResponseCode();
       // 200 ok

@@ -65,9 +65,9 @@ public class MainActivity extends AppCompatActivity
     fab.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+        Snackbar.make(view, "Sincronizando com a web...", Snackbar.LENGTH_LONG)
           .setAction("Action", null).show();
-        // TODO: criar classe SincronizarSistema AsynkTask
+        // criar classe SincronizarSistema AsynkTask
         SincronizarSistema task = new SincronizarSistema();
         task.execute();
       }
@@ -149,6 +149,7 @@ public class MainActivity extends AppCompatActivity
     return true;
   }
 
+  // TODO: descobrir como atualizar a tela listAdapter (que fica embaixo do botão sync)
   private class SincronizarSistema extends AsyncTask<String, String, String> {
 
     ProgressDialog progressDialog = new ProgressDialog(MainActivity.this);
@@ -205,7 +206,7 @@ public class MainActivity extends AppCompatActivity
         Log.e("WebService", "IOException - " + e.getMessage());
       }
 
-      // TODO: recebe JSON a resposta do servidor
+      // recebe JSON a resposta do servidor
       try {
         int response_code = connection.getResponseCode();
         // 200 ok
@@ -252,7 +253,8 @@ public class MainActivity extends AppCompatActivity
           for (int i = 0; i < jsonArray.length(); i++) {
             JSONObject jsonObject = jsonArray.getJSONObject(i);
             MediaEscolar obj = new MediaEscolar();
-            obj.setId(jsonObject.getInt(MediaEscolarDataModel.getId()));
+            //obj.setId(jsonObject.getInt(MediaEscolarDataModel.getId()));
+            obj.setIdPK(jsonObject.getInt(MediaEscolarDataModel.getId()));
             obj.setMateria(jsonObject.getString(MediaEscolarDataModel.getMateria()));
             obj.setBimestre(jsonObject.getString(MediaEscolarDataModel.getBimestre()));
             obj.setNotaProva(jsonObject.getDouble(MediaEscolarDataModel.getNotaProva()));

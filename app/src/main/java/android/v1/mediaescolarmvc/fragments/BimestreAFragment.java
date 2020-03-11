@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.v1.mediaescolarmvc.R;
 import android.v1.mediaescolarmvc.controller.MediaEscolarController;
 import android.v1.mediaescolarmvc.model.MediaEscolar;
+import android.v1.mediaescolarmvc.util.IncluirAsyncTask;
 import android.v1.mediaescolarmvc.util.UtilMediaEscolar;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -124,6 +125,8 @@ public class BimestreAFragment extends Fragment {
               // obj salvo c/sucesso no DB
               //Toast.makeText(context, "Dados salvos com sucesso...", Toast.LENGTH_LONG).show();
               UtilMediaEscolar.showMessage(context, "Dados salvos com sucesso...");
+              IncluirAsyncTask task = new IncluirAsyncTask(mediaEscolar, context);
+              task.execute();
 
             } else {
               // falha ao salvar o obj no DB

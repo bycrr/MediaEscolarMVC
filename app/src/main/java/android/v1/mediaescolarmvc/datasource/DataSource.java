@@ -104,6 +104,7 @@ public class DataSource extends SQLiteOpenHelper {
     while (cursor.moveToNext()) {
       obj = new MediaEscolar();
       obj.setId(cursor.getInt(cursor.getColumnIndex(MediaEscolarDataModel.getId())));
+      obj.setIdPK(cursor.getInt(cursor.getColumnIndex(MediaEscolarDataModel.getIdPK())));
       obj.setBimestre(cursor.getString(cursor.getColumnIndex(MediaEscolarDataModel.getBimestre())));
       obj.setMateria(cursor.getString(cursor.getColumnIndex(MediaEscolarDataModel.getMateria())));
       obj.setMediaFinal(cursor.getDouble(cursor.getColumnIndex(MediaEscolarDataModel.getMediaFinal())));
@@ -132,6 +133,7 @@ public class DataSource extends SQLiteOpenHelper {
     while (cursor.moveToNext()) {
       obj = new MediaEscolar();
       obj.setId(cursor.getInt(cursor.getColumnIndex(MediaEscolarDataModel.getId())));
+      obj.setIdPK(cursor.getInt(cursor.getColumnIndex(MediaEscolarDataModel.getIdPK())));
       obj.setBimestre(cursor.getString(cursor.getColumnIndex(MediaEscolarDataModel.getBimestre())));
       obj.setMateria(cursor.getString(cursor.getColumnIndex(MediaEscolarDataModel.getMateria())));
       obj.setMediaFinal(cursor.getDouble(cursor.getColumnIndex(MediaEscolarDataModel.getMediaFinal())));

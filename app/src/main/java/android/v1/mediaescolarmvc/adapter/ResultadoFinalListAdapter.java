@@ -129,10 +129,10 @@ public class ResultadoFinalListAdapter extends ArrayAdapter<MediaEscolar> implem
         break;
 
       case R.id.imgEditar:
-        // TODO: layout
-        // TODO: criar alertDialog p/editar os dados
-        // TODO: consumir MVC
-        // TODO: atualizar dataset/listview
+        // layout
+        // criar alertDialog p/editar os dados
+        // consumir MVC
+        // atualizar dataset/listview
         View alertView = view.inflate(getContext(), R.layout.alert_dialog_editar_listview, null);
         final EditText editMateria = alertView.findViewById(R.id.editMateria);
         final EditText editNotaTrabalho = alertView.findViewById(R.id.editNotaTrabalho);
