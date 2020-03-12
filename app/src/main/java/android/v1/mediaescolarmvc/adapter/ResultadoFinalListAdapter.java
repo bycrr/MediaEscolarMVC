@@ -7,9 +7,12 @@ import android.content.DialogInterface;
 import android.database.DataSetObserver;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.v1.mediaescolarmvc.R;
 import android.v1.mediaescolarmvc.controller.MediaEscolarController;
 import android.v1.mediaescolarmvc.model.MediaEscolar;
+import android.v1.mediaescolarmvc.util.AlterarAsyncTask;
+import android.v1.mediaescolarmvc.util.UtilMediaEscolar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -155,6 +158,15 @@ public class ResultadoFinalListAdapter extends ArrayAdapter<MediaEscolar> implem
               Double mediaFinal = mediaEscolarController.calcularMedia(mediaEscolar);
               mediaEscolar.setMediaFinal(mediaFinal);
               mediaEscolar.setSituacao(mediaEscolarController.resultadoFinal(mediaFinal));
+
+              try {
+                UtilMediaEscolar.showMessage(context, "Atualizando dados...");
+                AlterarAsyncTask task = new AlterarAsyncTask(mediaEscolar, context);
+                task.execute();
+
+              } catch (Exception e) {
+                Log.e( "Adapter", "Erro: " + e.getMessage());
+              }
               mediaEscolarController.alterar(mediaEscolar);
               atualizarLista(mediaEscolarController.getAllResultadoFinal());
             }

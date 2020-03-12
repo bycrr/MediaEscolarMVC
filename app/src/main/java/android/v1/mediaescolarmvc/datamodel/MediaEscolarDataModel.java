@@ -14,7 +14,7 @@ public class MediaEscolarDataModel {
   private final static String bimestre = "bimestre";
   private final static String situacao = "situacao";
   private final static String notaProva = "notaProva";
-  private final static String notaMateria = "notaMateria";
+  private final static String notaTrabalho = "notaTrabalho";
   private final static String mediaFinal = "mediaFinal";
   private static String queryCriarTabela = "";
 
@@ -27,7 +27,7 @@ public class MediaEscolarDataModel {
     queryCriarTabela += bimestre + " TEXT, ";
     queryCriarTabela += situacao + " TEXT, ";
     queryCriarTabela += notaProva + " REAL, ";
-    queryCriarTabela += notaMateria + " REAL, ";
+    queryCriarTabela += notaTrabalho + " REAL, ";
     queryCriarTabela += mediaFinal + " REAL ";
     queryCriarTabela += " ) ";
     return queryCriarTabela;
@@ -61,8 +61,8 @@ public class MediaEscolarDataModel {
     return notaProva;
   }
 
-  public static String getNotaMateria() {
-    return notaMateria;
+  public static String getNotaTrabalho() {
+    return notaTrabalho;
   }
 
   public static String getMediaFinal() {

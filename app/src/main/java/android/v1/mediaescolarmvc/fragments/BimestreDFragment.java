@@ -124,7 +124,7 @@ public class BimestreDFragment extends Fragment {
             if (mediaEscolarController.incluir(mediaEscolar)) {
               // obj salvo c/sucesso no DB
               //Toast.makeText(context, "Dados salvos com sucesso...", Toast.LENGTH_LONG).show();
-              UtilMediaEscolar.showMessage(context, "Dados salvos com sucesso...");
+              UtilMediaEscolar.showMessage(context, "Incluindo dados...");
               IncluirAsyncTask task = new IncluirAsyncTask(mediaEscolar, context);
               task.execute();
 

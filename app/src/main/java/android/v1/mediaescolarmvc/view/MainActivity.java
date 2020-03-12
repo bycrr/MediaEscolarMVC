@@ -159,7 +159,7 @@ public class MainActivity extends AppCompatActivity
 
     public SincronizarSistema() {
       this.builder = new Uri.Builder();
-      builder.appendQueryParameter("app", "MediaEscolar");
+      builder.appendQueryParameter("app", "MediaEscolarV1");
     }
 
     @Override
@@ -258,7 +258,7 @@ public class MainActivity extends AppCompatActivity
             obj.setMateria(jsonObject.getString(MediaEscolarDataModel.getMateria()));
             obj.setBimestre(jsonObject.getString(MediaEscolarDataModel.getBimestre()));
             obj.setNotaProva(jsonObject.getDouble(MediaEscolarDataModel.getNotaProva()));
-            obj.setNotaTrabalho(jsonObject.getDouble(MediaEscolarDataModel.getNotaMateria()));
+            obj.setNotaTrabalho(jsonObject.getDouble(MediaEscolarDataModel.getNotaTrabalho()));
             obj.setSituacao(jsonObject.getString(MediaEscolarDataModel.getSituacao()));
             obj.setMediaFinal(jsonObject.getDouble(MediaEscolarDataModel.getMediaFinal()));
             mediaEscolarController.incluir(obj);
