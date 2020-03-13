@@ -43,23 +43,23 @@ public class DataSource extends SQLiteOpenHelper {
 
   }
 
-  public boolean insert(String tabela, ContentValues dados) {
-    boolean sucesso = true;
+  public long insert(String tabela, ContentValues dados) {
+    long newId = 0l;
 
     try {
-      sucesso = db.insert(tabela, null, dados) > 0;
+      newId = db.insert(tabela, null, dados);
 
     } catch (Exception e) {
-      sucesso = false;
+      newId = 0l;
     }
-    return sucesso;
+    return newId;
   }
 
-  public boolean delete(String tabela, int id) {
+  public boolean delete(String tabela, long id) {
     boolean sucesso = true;
 
     try {
-      sucesso = db.delete(tabela, "id=?", new String[]{Integer.toString(id)}) > 0;
+      sucesso = db.delete(tabela, "id=?", new String[]{Long.toString(id)}) > 0;
 
     } catch (Exception e) {
       sucesso = false;
@@ -69,10 +69,10 @@ public class DataSource extends SQLiteOpenHelper {
 
   public boolean update(String tabela, ContentValues dados) {
     boolean sucesso = true;
-    int id = dados.getAsInteger("id");
+    long id = dados.getAsLong("id");
 
     try {
-      sucesso = db.update(tabela, dados, "id=?", new String[]{Integer.toString(id)}) > 0;
+      sucesso = db.update(tabela, dados, "id=?", new String[]{Long.toString(id)}) > 0;
 
     } catch (Exception e) {
       sucesso = false;
@@ -103,8 +103,8 @@ public class DataSource extends SQLiteOpenHelper {
     }*/
     while (cursor.moveToNext()) {
       obj = new MediaEscolar();
-      obj.setId(cursor.getInt(cursor.getColumnIndex(MediaEscolarDataModel.getId())));
-      obj.setIdPK(cursor.getInt(cursor.getColumnIndex(MediaEscolarDataModel.getIdPK())));
+      obj.setId(cursor.getLong(cursor.getColumnIndex(MediaEscolarDataModel.getId())));
+      obj.setIdPK(cursor.getLong(cursor.getColumnIndex(MediaEscolarDataModel.getIdPK())));
       obj.setBimestre(cursor.getString(cursor.getColumnIndex(MediaEscolarDataModel.getBimestre())));
       obj.setMateria(cursor.getString(cursor.getColumnIndex(MediaEscolarDataModel.getMateria())));
       obj.setMediaFinal(cursor.getDouble(cursor.getColumnIndex(MediaEscolarDataModel.getMediaFinal())));
@@ -132,8 +132,8 @@ public class DataSource extends SQLiteOpenHelper {
     }*/
     while (cursor.moveToNext()) {
       obj = new MediaEscolar();
-      obj.setId(cursor.getInt(cursor.getColumnIndex(MediaEscolarDataModel.getId())));
-      obj.setIdPK(cursor.getInt(cursor.getColumnIndex(MediaEscolarDataModel.getIdPK())));
+      obj.setId(cursor.getLong(cursor.getColumnIndex(MediaEscolarDataModel.getId())));
+      obj.setIdPK(cursor.getLong(cursor.getColumnIndex(MediaEscolarDataModel.getIdPK())));
       obj.setBimestre(cursor.getString(cursor.getColumnIndex(MediaEscolarDataModel.getBimestre())));
       obj.setMateria(cursor.getString(cursor.getColumnIndex(MediaEscolarDataModel.getMateria())));
       obj.setMediaFinal(cursor.getDouble(cursor.getColumnIndex(MediaEscolarDataModel.getMediaFinal())));
@@ -160,6 +160,24 @@ public class DataSource extends SQLiteOpenHelper {
 
     } catch (SQLiteCantOpenDatabaseException e) {
     }
+  }
+
+  public MediaEscolar getMediaEscolarById(Long id) {
+    MediaEscolar obj = new MediaEscolar();
+    String sql = "SELECT * FROM " + MediaEscolarDataModel.getTABELA() + " WHERE ID = " + id.toString();
+    cursor = db.rawQuery(sql, null);
+
+    if (cursor.moveToFirst()) {
+      obj.setId(cursor.getLong(cursor.getColumnIndex(MediaEscolarDataModel.getId())));
+      obj.setIdPK(cursor.getLong(cursor.getColumnIndex(MediaEscolarDataModel.getIdPK())));
+      obj.setBimestre(cursor.getString(cursor.getColumnIndex(MediaEscolarDataModel.getBimestre())));
+      obj.setMateria(cursor.getString(cursor.getColumnIndex(MediaEscolarDataModel.getMateria())));
+      obj.setMediaFinal(cursor.getDouble(cursor.getColumnIndex(MediaEscolarDataModel.getMediaFinal())));
+      obj.setNotaProva(cursor.getDouble(cursor.getColumnIndex(MediaEscolarDataModel.getNotaProva())));
+      obj.setNotaTrabalho(cursor.getDouble(cursor.getColumnIndex(MediaEscolarDataModel.getNotaTrabalho())));
+      obj.setSituacao(cursor.getString(cursor.getColumnIndex(MediaEscolarDataModel.getSituacao())));
+    }
+    return obj;
   }
 }
 

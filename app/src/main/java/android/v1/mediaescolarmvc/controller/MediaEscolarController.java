@@ -28,8 +28,8 @@ public class MediaEscolarController extends DataSource {
     return media >= 7 ? "Aprovado" : "Reprovado";
   }
 
-  public boolean incluir(MediaEscolar obj) {
-    boolean sucesso = true;
+  public long incluir(MediaEscolar obj) {
+    long novoId = 0l;
     dados = new ContentValues();
     dados.put(MediaEscolarDataModel.getMateria(), obj.getMateria());
     dados.put(MediaEscolarDataModel.getBimestre(), obj.getBimestre());
@@ -37,8 +37,8 @@ public class MediaEscolarController extends DataSource {
     dados.put(MediaEscolarDataModel.getNotaProva(), obj.getNotaProva());
     dados.put(MediaEscolarDataModel.getNotaTrabalho(), obj.getNotaTrabalho());
     dados.put(MediaEscolarDataModel.getMediaFinal(), obj.getMediaFinal());
-    sucesso = insert(MediaEscolarDataModel.getTABELA(), dados);
-    return sucesso;
+    novoId = insert(MediaEscolarDataModel.getTABELA(), dados);
+    return novoId;
   }
 
   public boolean apagar(MediaEscolar obj) {
@@ -51,6 +51,7 @@ public class MediaEscolarController extends DataSource {
     boolean sucesso = true;
     dados = new ContentValues();
     dados.put(MediaEscolarDataModel.getId(), obj.getId());
+    dados.put(MediaEscolarDataModel.getIdPK(), obj.getIdPK());
     dados.put(MediaEscolarDataModel.getMateria(), obj.getMateria());
     dados.put(MediaEscolarDataModel.getBimestre(), obj.getBimestre());
     dados.put(MediaEscolarDataModel.getSituacao(), obj.getSituacao());

@@ -30,6 +30,7 @@ public class BimestreAFragment extends Fragment {
   double notaProva;
   double notaTrabalho;
   double media;
+  long novoId;
   Context context;
 
   public BimestreAFragment() {
@@ -121,9 +122,11 @@ public class BimestreAFragment extends Fragment {
             editNotaTrabalho.setText(UtilMediaEscolar.formatarValorDecimal(notaTrabalho));
 
             //salvarSharedPreferences();
-            if (mediaEscolarController.incluir(mediaEscolar)) {
+            novoId = mediaEscolarController.incluir(mediaEscolar);
+            if ( novoId > 0) {
               // obj salvo c/sucesso no DB
               //Toast.makeText(context, "Dados salvos com sucesso...", Toast.LENGTH_LONG).show();
+              mediaEscolar.setId(novoId);
               UtilMediaEscolar.showMessage(context, "Incluindo dados...");
               IncluirAsyncTask task = new IncluirAsyncTask(mediaEscolar, context);
               task.execute();

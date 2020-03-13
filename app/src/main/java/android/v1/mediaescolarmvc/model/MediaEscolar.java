@@ -9,8 +9,8 @@ package android.v1.mediaescolarmvc.model;
 
 public class MediaEscolar {
 
-  private int id;
-  private int idPK;
+  private long id;
+  private long idPK;
   private String materia;
   private String bimestre;
   private String situacao;
@@ -21,19 +21,19 @@ public class MediaEscolar {
   public MediaEscolar() {
   }
 
-  public int getId() {
+  public long getId() {
     return id;
   }
 
-  public void setId(int id) {
+  public void setId(long id) {
     this.id = id;
   }
 
-  public int getIdPK() {
+  public long getIdPK() {
     return idPK;
   }
 
-  public void setIdPK(int idPK) {
+  public void setIdPK(long idPK) {
     this.idPK = idPK;
   }
 

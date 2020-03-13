@@ -77,7 +77,7 @@ public class ResultadoFinalListAdapter extends ArrayAdapter<MediaEscolar> implem
     int posicao = (Integer) view.getTag();
     Object object = getItem(posicao);
     mediaEscolar = (MediaEscolar) object;
-    mediaEscolarController = new MediaEscolarController(getContext());
+    mediaEscolarController = new MediaEscolarController(context);
 
     switch (view.getId()) {
       case R.id.imgLogo:
@@ -136,7 +136,7 @@ public class ResultadoFinalListAdapter extends ArrayAdapter<MediaEscolar> implem
         // criar alertDialog p/editar os dados
         // consumir MVC
         // atualizar dataset/listview
-        View alertView = view.inflate(getContext(), R.layout.alert_dialog_editar_listview, null);
+        View alertView = view.inflate(context, R.layout.alert_dialog_editar_listview, null);
         final EditText editMateria = alertView.findViewById(R.id.editMateria);
         final EditText editNotaTrabalho = alertView.findViewById(R.id.editNotaTrabalho);
         final EditText editNotaProva = alertView.findViewById(R.id.editNotaProva);
@@ -158,6 +158,7 @@ public class ResultadoFinalListAdapter extends ArrayAdapter<MediaEscolar> implem
               Double mediaFinal = mediaEscolarController.calcularMedia(mediaEscolar);
               mediaEscolar.setMediaFinal(mediaFinal);
               mediaEscolar.setSituacao(mediaEscolarController.resultadoFinal(mediaFinal));
+              mediaEscolarController.alterar(mediaEscolar);
 
               try {
                 UtilMediaEscolar.showMessage(context, "Atualizando dados...");
@@ -167,7 +168,6 @@ public class ResultadoFinalListAdapter extends ArrayAdapter<MediaEscolar> implem
               } catch (Exception e) {
                 Log.e( "Adapter", "Erro: " + e.getMessage());
               }
-              mediaEscolarController.alterar(mediaEscolar);
               atualizarLista(mediaEscolarController.getAllResultadoFinal());
             }
           });

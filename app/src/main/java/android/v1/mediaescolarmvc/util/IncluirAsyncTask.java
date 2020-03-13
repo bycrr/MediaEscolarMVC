@@ -27,11 +27,14 @@ public class IncluirAsyncTask extends AsyncTask<String, String, String> {
   URL url = null;
   Uri.Builder builder;
   private MediaEscolarController mediaEscolarController;
+  private MediaEscolar mediaEscolar;
   Context context;
 
   public IncluirAsyncTask(MediaEscolar obj, Context context ) {
     this.builder = new Uri.Builder();
     this.context = context;
+    mediaEscolar = new MediaEscolar();
+    mediaEscolar.setId(obj.getId());
 
     // passagem de parâmetros p/o WS
     builder.appendQueryParameter("app", "MediaEscolarV1");
@@ -125,6 +128,11 @@ public class IncluirAsyncTask extends AsyncTask<String, String, String> {
 
   @Override
   protected void onPostExecute(String result) {
+    mediaEscolarController = new MediaEscolarController(context);
+    mediaEscolar = mediaEscolarController.getMediaEscolarById(mediaEscolar.getId());
+    mediaEscolar.setIdPK(Integer.valueOf(result.toString().substring(4)));
+    mediaEscolarController.alterar(mediaEscolar);
+
     if (progressDialog != null && progressDialog.isShowing()) {
       progressDialog.dismiss();
     }

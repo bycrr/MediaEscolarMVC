@@ -254,7 +254,7 @@ public class MainActivity extends AppCompatActivity
             JSONObject jsonObject = jsonArray.getJSONObject(i);
             MediaEscolar obj = new MediaEscolar();
             //obj.setId(jsonObject.getInt(MediaEscolarDataModel.getId()));
-            obj.setIdPK(jsonObject.getInt(MediaEscolarDataModel.getId()));
+            obj.setIdPK(jsonObject.getLong(MediaEscolarDataModel.getId()));
             obj.setMateria(jsonObject.getString(MediaEscolarDataModel.getMateria()));
             obj.setBimestre(jsonObject.getString(MediaEscolarDataModel.getBimestre()));
             obj.setNotaProva(jsonObject.getDouble(MediaEscolarDataModel.getNotaProva()));
