@@ -12,6 +12,7 @@ import android.v1.mediaescolarmvc.R;
 import android.v1.mediaescolarmvc.controller.MediaEscolarController;
 import android.v1.mediaescolarmvc.model.MediaEscolar;
 import android.v1.mediaescolarmvc.util.AlterarAsyncTask;
+import android.v1.mediaescolarmvc.util.ApagarAsyncTask;
 import android.v1.mediaescolarmvc.util.UtilMediaEscolar;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -114,7 +115,14 @@ public class ResultadoFinalListAdapter extends ArrayAdapter<MediaEscolar> implem
           @Override
           public void onClick(DialogInterface dialog, int which) {
             // deletar o registro
-            mediaEscolarController.apagar(mediaEscolar);
+            try {
+              mediaEscolarController.apagar(mediaEscolar);
+              ApagarAsyncTask task = new ApagarAsyncTask(mediaEscolar, context);
+              task.execute();
+
+            } catch (Exception e) {
+              Log.e("Adapter", "Erro: " + e.getMessage());
+            }
             // caso for preciso desabilitar algum dos botõeszinhos =>
             // linha.imgDeletar.setEnabled(false);
             atualizarLista(mediaEscolarController.getAllResultadoFinal());
@@ -136,6 +144,7 @@ public class ResultadoFinalListAdapter extends ArrayAdapter<MediaEscolar> implem
         // criar alertDialog p/editar os dados
         // consumir MVC
         // atualizar dataset/listview
+        mediaEscolar = mediaEscolarController.getMediaEscolarById(mediaEscolar.getId());
         View alertView = view.inflate(context, R.layout.alert_dialog_editar_listview, null);
         final EditText editMateria = alertView.findViewById(R.id.editMateria);
         final EditText editNotaTrabalho = alertView.findViewById(R.id.editNotaTrabalho);
@@ -152,18 +161,19 @@ public class ResultadoFinalListAdapter extends ArrayAdapter<MediaEscolar> implem
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
               // TODO: implementar validação
+              mediaEscolar = mediaEscolarController.getMediaEscolarById(mediaEscolar.getId());
               mediaEscolar.setMateria(editMateria.getText().toString());
               mediaEscolar.setNotaProva(Double.parseDouble(editNotaProva.getText().toString()));
               mediaEscolar.setNotaTrabalho(Double.parseDouble(editNotaTrabalho.getText().toString()));
               Double mediaFinal = mediaEscolarController.calcularMedia(mediaEscolar);
               mediaEscolar.setMediaFinal(mediaFinal);
               mediaEscolar.setSituacao(mediaEscolarController.resultadoFinal(mediaFinal));
-              mediaEscolarController.alterar(mediaEscolar);
 
               try {
                 UtilMediaEscolar.showMessage(context, "Atualizando dados...");
                 AlterarAsyncTask task = new AlterarAsyncTask(mediaEscolar, context);
                 task.execute();
+                mediaEscolarController.alterar(mediaEscolar);
 
               } catch (Exception e) {
                 Log.e( "Adapter", "Erro: " + e.getMessage());
@@ -241,9 +251,9 @@ public class ResultadoFinalListAdapter extends ArrayAdapter<MediaEscolar> implem
   public View getView(int position, View linhaDataSet, @NonNull ViewGroup parent) {
     mediaEscolar = getItem(position);
     //ViewHolder linha;
-    linha = new ViewHolder();
 
     if (linhaDataSet == null) {
+      linha = new ViewHolder();
       LayoutInflater layoutResultadoFinalList = LayoutInflater.from(getContext());
       linhaDataSet = layoutResultadoFinalList.inflate(R.layout.lisview_resultado_final, parent, false);
       linha.txtMateria = linhaDataSet.findViewById(R.id.txtMateria);

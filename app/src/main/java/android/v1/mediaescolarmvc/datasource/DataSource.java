@@ -90,7 +90,7 @@ public class DataSource extends SQLiteOpenHelper {
   public List<MediaEscolar> getAllMediaEscolar() {
     MediaEscolar obj;
     List<MediaEscolar> lista = new ArrayList<>();
-    String sql = "SELECT * FROM " + MediaEscolarDataModel.getTABELA() + " ORDER BY materia";
+    String sql = "SELECT * FROM " + MediaEscolarDataModel.getTABELA() + " ORDER BY bimestre, materia";
     cursor = db.rawQuery(sql, null);
 
     /*if (cursor.moveToFirst()) {
@@ -119,7 +119,7 @@ public class DataSource extends SQLiteOpenHelper {
   public ArrayList<MediaEscolar> getAllResultadoFinal() {
     MediaEscolar obj;
     ArrayList<MediaEscolar> lista = new ArrayList<>();
-    String sql = "SELECT * FROM " + MediaEscolarDataModel.getTABELA() + " ORDER BY materia";
+    String sql = "SELECT * FROM " + MediaEscolarDataModel.getTABELA() + " ORDER BY bimestre, materia";
     cursor = db.rawQuery(sql, null);
 
     /*if (cursor.moveToFirst()) {

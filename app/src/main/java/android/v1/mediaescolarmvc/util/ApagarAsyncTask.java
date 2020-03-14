@@ -20,7 +20,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class AlterarAsyncTask extends AsyncTask<String, String, String> {
+public class ApagarAsyncTask extends AsyncTask<String, String, String> {
 
   ProgressDialog progressDialog;
   HttpURLConnection connection;
@@ -29,7 +29,7 @@ public class AlterarAsyncTask extends AsyncTask<String, String, String> {
   private MediaEscolarController mediaEscolarController;
   Context context;
 
-  public AlterarAsyncTask(MediaEscolar obj, Context context ) {
+  public ApagarAsyncTask(MediaEscolar obj, Context context ) {
     this.builder = new Uri.Builder();
     this.context = context;
 
@@ -38,19 +38,13 @@ public class AlterarAsyncTask extends AsyncTask<String, String, String> {
 
     // usar data model
     builder.appendQueryParameter(MediaEscolarDataModel.getIdPK(), String.valueOf(obj.getIdPK()));
-    builder.appendQueryParameter(MediaEscolarDataModel.getBimestre(), obj.getBimestre());
-    builder.appendQueryParameter(MediaEscolarDataModel.getSituacao(), obj.getSituacao());
-    builder.appendQueryParameter(MediaEscolarDataModel.getMediaFinal(), String.valueOf(obj.getMediaFinal()));
-    builder.appendQueryParameter(MediaEscolarDataModel.getNotaTrabalho(), String.valueOf(obj.getNotaTrabalho()));
-    builder.appendQueryParameter(MediaEscolarDataModel.getNotaProva(), String.valueOf(obj.getNotaProva()));
-    builder.appendQueryParameter(MediaEscolarDataModel.getMateria(), obj.getMateria());
   }
 
   @Override
   protected void onPreExecute() {
-    Log.i("WebService", "AlterarAsyncTask()...");
+    Log.i("WebService", "ApagarAsyncTask()...");
     progressDialog = new ProgressDialog(context);
-    progressDialog.setMessage("Alterando, por favor espere...");
+    progressDialog.setMessage("Apagando, por favor espere...");
     progressDialog.setCancelable(false);
     progressDialog.show();
   }
@@ -60,7 +54,7 @@ public class AlterarAsyncTask extends AsyncTask<String, String, String> {
 
     // montar a URL com o endereço do script PHP
     try {
-      url = new URL(UtilMediaEscolar.URL_WEB_SERVICE + "APIAlterarDados.php");
+      url = new URL(UtilMediaEscolar.URL_WEB_SERVICE + "APIApagarDados.php");
 
     } catch (MalformedURLException e) {
       Log.e("WebService", "MalformedURLException - " + e.getMessage());
@@ -107,7 +101,7 @@ public class AlterarAsyncTask extends AsyncTask<String, String, String> {
         while ((line = bufferedReader.readLine()) != null) {
           result.append(line);
         }
-        Log.i("WebService", "Alteração com sucesso.");
+        Log.i("WebService", "Exclusão com sucesso.");
         return result.toString();
 
       } else {
