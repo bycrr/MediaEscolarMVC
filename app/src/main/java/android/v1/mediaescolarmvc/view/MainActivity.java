@@ -1,7 +1,12 @@
 package android.v1.mediaescolarmvc.view;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -9,6 +14,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.NotificationCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -51,6 +57,8 @@ public class MainActivity extends AppCompatActivity
   FragmentManager fragmentManager;
   MediaEscolarController mediaEscolarController;
   Context context;
+  String mensagem = "50% de desconto.";
+  String titulo = "Promoção";
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -86,6 +94,9 @@ public class MainActivity extends AppCompatActivity
 
     // 4# passo
     //fragmentManager.beginTransaction().replace(R.id.content_fragment, new ModeloFragment()).commit();
+
+    // mostra notificação na barra do sistema
+    notificarUsuario(mensagem, titulo);
   }
 
   @Override
@@ -277,5 +288,20 @@ public class MainActivity extends AppCompatActivity
         }
       }
     }
+  }
+
+  private void notificarUsuario(String mensagem, String titulo) {
+    NotificationCompat.Builder notificacao = new NotificationCompat.Builder(getBaseContext());
+    notificacao.setContentTitle(titulo);
+    notificacao.setContentText(mensagem);
+    notificacao.setPriority(Notification.PRIORITY_HIGH);
+    notificacao.setLargeIcon(BitmapFactory.decodeResource(getBaseContext().getResources(), R.mipmap.ic_upload));
+    notificacao.setSmallIcon(R.drawable.ic_bell_notify);
+    Intent intent = new Intent(getBaseContext(), NotificacaoActivity.class);
+    PendingIntent pendingIntent = PendingIntent.getActivity(getBaseContext(), 100, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+    notificacao.setAutoCancel(true);
+    notificacao.setContentIntent(pendingIntent);
+    NotificationManager notificationManager = (NotificationManager) getBaseContext().getSystemService(Context.NOTIFICATION_SERVICE);
+    notificationManager.notify(9000, notificacao.build());
   }
 }
